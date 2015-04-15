@@ -30,9 +30,7 @@ app.use(function(req, res, next) {
 });
 
 // Send mail
-app.get('/mail', function(req, res) {
-  res.send('mail');
-});
+app.get('/mail', require('./send_email.js'));
 
 // setup views with ejs
 app.use('/public', express.static(path.join(rootPath, 'public')));

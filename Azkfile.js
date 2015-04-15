@@ -6,7 +6,7 @@
 systems({
   'azkdemo-services': {
     // Dependent systems
-    depends: ["redis"],
+    depends: ["mail", "redis"],
     // More images:  http://images.azk.io
     image: {"docker": "azukiapp/node:0.12"},
     // Steps to execute before running instances
@@ -40,6 +40,24 @@ systems({
     command: "redis-server --appendonly yes",
     mounts: {
       "/data": persistent("data"),
+    },
+  },
+
+  // MailCatcher system
+  mail: {
+    // Dependent systems
+    depends: [],
+    // More images:  http://images.azk.io
+    image: {"docker": "schickling/mailcatcher"},
+    http: {
+      domains: [
+        "#{system.name}.azkdemo.#{azk.default_domain}",
+      ],
+    },
+    ports: {
+      // exports global variables
+      http: "1080/tcp",
+      smtp: "1025/tcp",
     },
   },
 });

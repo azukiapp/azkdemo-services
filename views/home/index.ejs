@@ -14,7 +14,7 @@
       </div>
       <div style="position:relative;float:right;">
         <center><br><br><br>
-          <a href="#" id="btn_send" style="display:block; padding:20px;">Enviar email</a>
+          <a href="#" id="btn_send" style="display:block; padding:20px;">Send email</a>
           <div style="padding-top: 10px;">
             Msgs:
             <ul style="text-align: left; padding: 10px 20px; border: 1px solid #e7e7e7; width:400px; height:200px;" id="emails_received"></ul>
@@ -24,5 +24,22 @@
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script>
+      var ajaxUrl = "/mail";
+      $(document).ready(function() {
+        $('#btn_send').on('click', function(e){
+          $.get(ajaxUrl, function(result){
+            $('#emails_received').append('<li>' + result + "</li>");
+          });
+          e.preventDefault();
+        });
+
+        var socket = io.connect();
+        socket.on('msgs', function(data) {
+          console.log(data);
+          $('#emails_received').append("<li>ngrok: " + data + "</li>");
+        });
+      });
+    </script>
   </body>
 </html>
