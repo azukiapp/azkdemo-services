@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title> azk Demo </title>
+  </head>
+  <body>
+    <div style="width: 800px; margin:auto;">
+      <div style="position:relative;float:left;">
+        <center>
+          <img width="316" height="313" src="/public/logo.png" />
+          <h1>hello! :)</h1>
+          <h2>instance id: <%= azk_uid %></h2>
+          <%= counter %>
+        </center>
+      </div>
+      <div style="position:relative;float:right;">
+        <center><br><br><br>
+          <a href="#" id="btn_send" style="display:block; padding:20px;">Enviar email</a>
+          <div style="padding-top: 10px;">
+            Msgs:
+            <ul style="text-align: left; padding: 10px 20px; border: 1px solid #e7e7e7; width:400px; height:200px;" id="emails_received"></ul>
+          </div>
+        </center>
+      </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  </body>
+</html>
