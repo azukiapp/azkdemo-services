@@ -32,6 +32,12 @@ app.use(function(req, res, next) {
 // Send mail
 app.get('/mail', require('./send_email.js'));
 
+// Webhooks
+app.get('/webhooks', function(req, res) {
+  io.sockets.emit('msgs', req.param('msg'));
+  res.send('Message sent');
+});
+
 // setup views with ejs
 app.use('/public', express.static(path.join(rootPath, 'public')));
 app.set('views',    path.join(rootPath, 'views'));
